@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javapandeng.mapper.NumberMapper">
+    <!--实体类与数据库映射字段部分-->
+    <resultMap id="ResultMapNumber" type="com.javapandeng.po.Number1">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="nownum" column="nownum" jdbcType="INTEGER"/>
+        <result property="num1" column="num1" jdbcType="INTEGER"/>
+        <result property="num2" column="num2" jdbcType="INTEGER"/>
+        <result property="num3" column="num3" jdbcType="INTEGER"/>
+        <result property="num4" column="num4" jdbcType="INTEGER"/>
+        <result property="num5" column="num5" jdbcType="INTEGER"/>
+
+        <result property="price1" column="price1" jdbcType="VARCHAR"/>
+        <result property="price2" column="price2" jdbcType="VARCHAR"/>
+        <result property="price3" column="price3" jdbcType="VARCHAR"/>
+        <result property="price4" column="price4" jdbcType="VARCHAR"/>
+        <result property="price5" column="price5" jdbcType="VARCHAR"/>
+
+        <result property="url1" column="url1" jdbcType="VARCHAR"/>
+
+        <result property="isDelete" column="isDelete" jdbcType="INTEGER"/>
+
+    </resultMap>
+
+    <!-- 声明数据库字段 -->
+    <sql id="Number_field">
+        id,name,address,nownum,num1,num2,num3,num4,num5,price1,price2,price3,price4,price5,url1,isDelete
+    </sql>
+
+    <!-- 实体类属性-->
+    <sql id="Number_insert">
+        #{id},#{name},#{address},#{nownum},#{num1},#{num2},#{num3},#{num4},#{num5},#{price1},#{price2},#{price3},#{price4},#{price5},#{url1},#{isDelete}
+    </sql>
+
+    <!-- 更新结果  -->
+    <sql id="Number_update">
+        <if test="name != null">
+            name = #{name},
+        </if>
+        <if test="address != null">
+            address = #{address},
+        </if>
+        <if test=" nownum!= null">
+             nownum= #{nownum},
+        </if>
+        <if test="num1 != null">
+            num1 = #{num1},
+        </if>
+        <if test="num2 != null">
+            num2 = #{num2},
+        </if>
+        <if test="num3 != null">
+            num3 = #{num3},
+        </if>
+        <if test="num4 != null">
+            num4 = #{num4},
+        </if>
+        <if test="num5 != null">
+            num5 = #{num5},
+        </if>
+        <if test="price1 != null">
+            price1 = #{price1},
+        </if>
+        <if test="price2 != null">
+            price2 = #{price2},
+        </if>
+        <if test="price3 != null">
+            price3 = #{price3},
+        </if>
+        <if test="price4 != null">
+            price4 = #{price4},
+        </if>
+        <if test="price5 != null">
+        price5= #{price5},
+        </if>
+        <if test="url1 != null">
+            url1 = #{url1},
+        </if>
+        <if test="isDelete != null">
+            isDelete = #{isDelete}
+        </if>
+    </sql>
+
+    <!-- 查询时条件   -->
+    <sql id="Number_where">
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="name != null">
+            and name = #{name}
+        </if>
+        <if test="address != null">
+            and address = #{address}
+        </if>
+        <if test="nownum != null">
+            and nownum = #{nownum}
+        </if>
+        <if test="num1 != null">
+            and num1 = #{num1}
+        </if>
+        <if test="num2 != null">
+            and num2= #{num2}
+        </if>
+        <if test="num3 != null">
+            and num3 = #{num3}
+        </if>
+        <if test="num4 != null">
+            and num4 = #{num4}
+        </if>
+        <if test="num5 != null">
+            and num5 = #{num5}
+        </if>
+        <if test="price1 != null">
+            and price1 = #{price1}
+        </if>
+        <if test="price2 != null">
+            and price2= #{price2}
+        </if>
+        <if test="price3 != null">
+            and price3 = #{price3}
+        </if>
+        <if test="price4!= null">
+            and price4 = #{price4}
+        </if>
+        <if test="price5 != null">
+            and price5 = #{price5}
+        </if>
+        <if test="url1 != null">
+            and url1 = #{url1}
+        </if>
+
+        <if test="isDelete != null">
+            and isDelete = #{isDelete}
+        </if>
+    </sql>
+
+    <!--    新增        -->
+    <!--    参数：实体类-->
+    <!--    返回：主键 -->
+    <insert id="insert" parameterType="com.javapandeng.po.Number1" useGeneratedKeys="true" keyProperty="id">
+        insert into number (
+        <include refid="Number_field"/>
+        ) values(
+        <include refid="Number_insert"/>
+        )
+    </insert>
+
+    <!-- 根据实体主键删除一个实体-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from number where id=#{id}
+    </delete>
+
+    <!-- 通过实体删除-->
+    <delete id="deleteByEntity" parameterType="com.javapandeng.po.Number1">
+        delete from number where 1=1
+        <include refid="Number_where"/>
+    </delete>
+
+    <!-- 通过map删除 -->
+    <delete id="deleteByMap" parameterType="java.util.HashMap">
+        delete from number where 1=1
+        <include refid="Number_where"/>
+    </delete>
+
+    <!-- 更新一个实体 -->
+    <update id="update" parameterType="com.javapandeng.po.Number1">
+        update number
+        <set>
+            <include refid="Number_update"/>
+        </set>
+        where 1=1
+            <include refid="Number_where"/>
+    </update>
+
+    <!-- 通过id进行修改-->
+    <update id="updateById" parameterType="com.javapandeng.po.Number1">
+        update number
+        <set>
+            <include refid="Number_update"/>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- 根据参数查询-->
+    <select id="listByMap" resultMap="ResultMapNumber" parameterType="map">
+        select <include refid="Number_field"/>
+        from number where 1=1
+        <include refid="Number_where"/>
+    </select>
+
+    <!-- 查询整个表 -->
+    <select id="listAll" resultMap="ResultMapNumber">
+        select <include refid="Number_field"/>
+        from number
+    </select>
+
+    <!-- 查询所有实体,根据实体属性值为判断条件查询所有实体-->
+    <select id="listAllByEntity" resultMap="ResultMapNumber" parameterType="com.javapandeng.po.Number1">
+        select <include refid="Number_field"/>
+        from number where 1=1
+        <include refid="Number_where"/>
+    </select>
+
+    <!-- 根据主键获取一个实体-->
+    <select id="load" resultMap="ResultMapNumber" parameterType="java.lang.Integer">
+        select <include refid="Number_field"/>
+        from number where id=#{id}
+    </select>
+
+    <!-- 根据主键获取一个实体-->
+    <select id="getById" resultMap="ResultMapNumber" parameterType="java.lang.Integer">
+        select <include refid="Number_field"/>
+        from number where id=#{id}
+    </select>
+
+    <!-- 通过map查询-->
+    <select id="getByMap" resultMap="ResultMapNumber" parameterType="map">
+        select <include refid="Number_field"/>
+        from number where 1=1
+        <include refid="Number_where"/>
+    </select>
+
+    <!--通过对象查询-不分页-->
+    <select id="getByEntity" resultMap="ResultMapNumber" parameterType="com.javapandeng.po.Number1">
+        select <include refid="Number_field"/>
+        from number where 1=1
+        <include refid="Number_where"/>
+    </select>
+
+    <!-- 通过map查询分页-->
+    <select id="findByMap" resultMap="ResultMapNumber" parameterType="map">
+        select <include refid="Number_field"/>
+        from number where 1=1
+        <include refid="Number_where"/>
+    </select>
+
+    <!--通过对象查询分页-->
+    <select id="findByEntity" resultMap="ResultMapNumber" parameterType="com.javapandeng.po.Number1">
+        select <include refid="Number_field"/>
+        from number where 1=1
+        <include refid="Number_where"/>
+    </select>
+
+    <!-- 批量新增-->
+    <select id="insertBatch" parameterType="java.util.List">
+        insert into number (
+        <include refid="Number_field"/>
+        ) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.name},#{item.address},#{item.nownum},#{item.num1},#{item.num2},#{item.num3},#{item.num4},#{item.num5},#{item.price1},#{item.price2},#{item.price3},#{item.price4},#{item.price5},
+            #{item.url1},#{item.isDelete})
+        </foreach>
+    </select>
+
+    <!-- 批量修改-->
+    <update id="updateBatch" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update item
+            <set>
+                <if test="item.name != null">
+                    name = #{item.name},
+                </if>
+                <if test="item.address != null">
+                    address = #{item.address},
+                </if>
+                <if test="item.nownum != null">
+                    nownum = #{item.nownum},
+                </if>
+                <if test="item.num1 != null">
+                    num1 = #{item.num1},
+                </if>
+                <if test="item.num2 != null">
+                    num2 = #{item.num2},
+                </if>
+                <if test="item.num3 != null">
+                    num3 = #{item.num3},
+                </if>
+                <if test="item.num4 != null">
+                    num4 = #{item.num4},
+                </if>
+                <if test="item.num5 != null">
+                    num5 = #{item.num5},
+                </if>
+                <if test="item.price1 != null">
+                    price1 = #{item.price2},
+                </if>
+                <if test="item.price2 != null">
+                    price2 = #{item.price2},
+                </if>
+                <if test="item.price3 != null">
+                    price3 = #{item.price3},
+                </if>
+                <if test="item.price4 != null">
+                    price4 = #{item.price4},
+                </if>
+                <if test="item.price5 != null">
+                    price5 = #{item.price5},
+                </if>
+                <if test="item.url1 != null">
+                    url1 = #{item.url1},
+                </if>
+
+                <if test="item.isDelete != null">
+                    isDelete = #{item.isDelete}
+                </if>
+            </set>
+            where 1=1
+            <if test="item.id != null">
+               and id = #{item.id}
+            </if>
+        </foreach>
+    </update>
+
+    <!-- 封装纯sql语法-->
+    <!-- 查询一个对象返回map-->
+    <select id="getBySqlReturnMap" resultType="map">
+        ${sql}
+    </select>
+
+    <!-- 查询一个对象返回实体类-->
+    <select id="getBySqlReturnEntity" resultMap="ResultMapNumber">
+        ${sql}
+    </select>
+
+    <!-- 查询一个对象返回map列表-->
+    <select id="listBySqlReturnMap" resultType="map">
+        ${sql}
+    </select>
+
+    <!-- 查询列表返回实体-->
+    <select id="listBySqlReturnEntity" resultMap="ResultMapNumber">
+        ${sql}
+    </select>
+
+    <!-- 查询分页-->
+    <select id="findBySqlRerturnEntity" resultMap="ResultMapNumber">
+        ${sql}
+    </select>
+
+    <!-- 通过sql修改-->
+    <update id="updateBysql">
+        ${sql}
+    </update>
+
+    <!-- 通过sql删除-->
+    <delete id="deleteBySql">
+         ${sql}
+    </delete>
+</mapper>
